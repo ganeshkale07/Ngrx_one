@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { State, getShowProductCode } from "../state/product.reducer";
 
 @Component({
   selector: 'app-list',
@@ -8,12 +9,11 @@ import { Store } from '@ngrx/store';
 })
 export class ListComponent implements OnInit {
   showProductCode: any;
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit(): void {
-    this.store.select('products').subscribe((productState) => {
-      alert('Hi');
-      this.showProductCode = productState.showProductCode;
+    this.store.select(getShowProductCode).subscribe((showProductCode) => {
+      this.showProductCode = showProductCode;
     });
   }
 
